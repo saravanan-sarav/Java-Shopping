@@ -17,4 +17,7 @@ public class WelcomePage {
     public void printAuthMenu() {
         println(StringUtil.AUTH_MENU);
     }
+    void check(){
+        System.out.println();
+    }
 }
