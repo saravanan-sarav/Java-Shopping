@@ -1,7 +1,5 @@
 package com.codewithashith.utils;
 
-import java.util.InputMismatchException;
-
 import static com.codewithashith.utils.AppScanner.getScanner;
 import static com.codewithashith.utils.Utils.print;
 
@@ -18,7 +16,7 @@ public class AppInput {
         try {
             input = Integer.parseInt(getScanner().nextLine());
         } catch (Exception ex) {
-            throw new AppException(StringUtil.INVALID_CHOICE);
+            throw new AppException(StringUtils.INVALID_CHOICE);
         }
         return input;
     }

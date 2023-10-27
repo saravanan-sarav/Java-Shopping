@@ -4,7 +4,8 @@ import com.codewithashith.controller.impl.IAuthController;
 import com.codewithashith.models.Role;
 import com.codewithashith.models.User;
 import com.codewithashith.utils.AppException;
-import com.codewithashith.utils.StringUtil;
+import com.codewithashith.utils.StringUtils;
+import com.codewithashith.view.AuthPage;
 import com.codewithashith.view.LoginPage;
 import com.codewithashith.view.RegisterPage;
 
@@ -16,34 +17,36 @@ import java.util.Scanner;
 import static com.codewithashith.utils.AppInput.enterInt;
 import static com.codewithashith.utils.AppInput.enterString;
 import static com.codewithashith.utils.FileUtil.getCredentialsFile;
+import static com.codewithashith.utils.UserUtils.setLoggedInUser;
 import static com.codewithashith.utils.Utils.println;
 
 public class AuthController implements IAuthController {
 
     private final HomeController homeController;
-    private final AppController appController;
     private final LoginPage loginPage;
     private final RegisterPage registerPage;
 
-    public AuthController(AppController appController) {
-        this.appController = appController;
-        homeController = new HomeController();
+    private final AuthPage authPage;
+
+    public AuthController() {
+        authPage = new AuthPage();
+        homeController = new HomeController(this);
         loginPage = new LoginPage();
         registerPage = new RegisterPage();
     }
 
     @Override
     public void authMenu() {
-        appController.printAuthMenu();
+        authPage.printAuthMenu();
         int choice;
         try {
-            choice = enterInt(StringUtil.ENTER_CHOICE);
+            choice = enterInt(StringUtils.ENTER_CHOICE);
             if (choice == 1) {
                 login();
             } else if (choice == 2) {
                 register();
             } else {
-                invalidChoice(new AppException(StringUtil.INVALID_CHOICE));
+                invalidChoice(new AppException(StringUtils.INVALID_CHOICE));
             }
         } catch (AppException appException) {
             invalidChoice(appException);
@@ -53,11 +56,12 @@ public class AuthController implements IAuthController {
     @Override
     public void login() {
         String email, password;
-        email = enterString(StringUtil.ENTER_EMAIL);
-        password = enterString(StringUtil.ENTER_PASSWORD);
+        email = enterString(StringUtils.ENTER_EMAIL);
+        password = enterString(StringUtils.ENTER_PASSWORD);
 
         User user = validateUser(email, password);
         if (user != null) {
+            setLoggedInUser(user);
             homeController.printMenu();
         } else {
             loginPage.printInvalidCredentials();
@@ -69,10 +73,10 @@ public class AuthController implements IAuthController {
     @Override
     public void register() {
         String name, email, password, c_password;
-        name = enterString(StringUtil.ENTER_NAME);
-        email = enterString(StringUtil.ENTER_EMAIL);
-        password = enterString(StringUtil.ENTER_PASSWORD);
-        c_password = enterString(StringUtil.ENTER_PASSWORD_AGAIN);
+        name = enterString(StringUtils.ENTER_NAME);
+        email = enterString(StringUtils.ENTER_EMAIL);
+        password = enterString(StringUtils.ENTER_PASSWORD);
+        c_password = enterString(StringUtils.ENTER_PASSWORD_AGAIN);
 
         if (password.equals(c_password)) {
             try {

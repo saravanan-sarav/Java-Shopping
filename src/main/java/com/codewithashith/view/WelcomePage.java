@@ -1,23 +1,17 @@
 package com.codewithashith.view;
 
-import com.codewithashith.utils.StringUtil;
+import com.codewithashith.utils.StringUtils;
 
 import static com.codewithashith.utils.Utils.println;
 
 public class WelcomePage {
     public void welcome() {
         try {
-            println(StringUtil.WELCOME_MESSAGE);
+            println(StringUtils.WELCOME_MESSAGE);
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void printAuthMenu() {
-        println(StringUtil.AUTH_MENU);
-    }
-    void check(){
-        System.out.println();
-    }
 }
