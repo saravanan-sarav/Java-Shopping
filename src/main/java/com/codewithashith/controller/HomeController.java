@@ -1,6 +1,7 @@
 package com.codewithashith.controller;
 
 import com.codewithashith.controller.impl.IHomeController;
+import com.codewithashith.models.Cart;
 import com.codewithashith.utils.AppException;
 import com.codewithashith.utils.StringUtils;
 import com.codewithashith.view.HomePage;
@@ -11,14 +12,18 @@ import static com.codewithashith.utils.Utils.println;
 
 public class HomeController implements IHomeController {
 
-    HomePage homePage;
-    AuthController authController;
-    CategoryController categoryController;
+    private final HomePage homePage;
+    private final AuthController authController;
+    private final CategoryController categoryController;
+    private final ProductController productController;
+    private final CartController cartController;
 
     public HomeController(AuthController authController) {
         homePage = new HomePage();
         this.authController = authController;
-        categoryController = new CategoryController();
+        productController = new ProductController(this);
+        categoryController = new CategoryController(this);
+        cartController = new CartController(this);
     }
 
     @Override
@@ -29,9 +34,9 @@ public class HomeController implements IHomeController {
             if (choice == 1) {
                 categoryController.printMenu();
             } else if (choice == 2) {
-
+                productController.showProducts(0);
             } else if (choice == 3) {
-
+                cartController.printCart();
             } else if (choice == 4) {
 
             } else if (choice == 5) {

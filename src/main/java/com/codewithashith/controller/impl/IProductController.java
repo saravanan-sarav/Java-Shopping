@@ -1,5 +1,5 @@
 package com.codewithashith.controller.impl;
 
 public interface IProductController {
-    void showProducts(int validChoice);
+    void showProducts(int categoryId);
 }

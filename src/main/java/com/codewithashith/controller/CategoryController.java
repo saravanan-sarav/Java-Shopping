@@ -14,12 +14,14 @@ import static com.codewithashith.utils.Utils.println;
 
 public class CategoryController implements ICategoryController {
 
-    CategoryPage categoryPage;
-    ProductController productController;
+    private final CategoryPage categoryPage;
+    private final ProductController productController;
+    private final HomeController homeController;
 
-    public CategoryController() {
+    public CategoryController(HomeController homeController) {
         categoryPage = new CategoryPage();
-        productController = new ProductController();
+        productController = new ProductController(homeController);
+        this.homeController = homeController;
     }
 
     @Override
@@ -29,19 +31,24 @@ public class CategoryController implements ICategoryController {
 
         try {
             int choice = enterInt(StringUtils.ENTER_CHOICE);
-            int validChoice = 0;
 
-            for (Category category : categories) {
-                if (category.getId() == choice) {
-                    validChoice = category.getId();
-                    break;
-                }
-            }
-
-            if (validChoice != 0) {
-                productController.showProducts(validChoice);
+            if (choice == 99) {
+                homeController.printMenu();
             } else {
-                invalidChoice(new AppException(StringUtils.INVALID_CHOICE));
+                int validCategoryId = 0;
+
+                for (Category category : categories) {
+                    if (category.getId() == choice) {
+                        validCategoryId = category.getId();
+                        break;
+                    }
+                }
+
+                if (validCategoryId != 0) {
+                    productController.showProducts(validCategoryId);
+                } else {
+                    invalidChoice(new AppException(StringUtils.INVALID_CHOICE));
+                }
             }
         } catch (AppException appException) {
             invalidChoice(appException);

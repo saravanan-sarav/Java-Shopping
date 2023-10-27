@@ -21,8 +21,8 @@ public class LoadUtils {
         products.add(tShirtProduct);
         products.add(shirtProduct);
 
-        Product iphoneProduct = new Product(1, "iPhone", "iPhone", 1000, 10, mobileCategory);
-        Product samsungProduct = new Product(2, "Samsung", "Samsung", 1005, 10, mobileCategory);
+        Product iphoneProduct = new Product(3, "iPhone", "iPhone", 1000, 10, mobileCategory);
+        Product samsungProduct = new Product(4, "Samsung", "Samsung", 1005, 10, mobileCategory);
         products.add(iphoneProduct);
         products.add(samsungProduct);
 

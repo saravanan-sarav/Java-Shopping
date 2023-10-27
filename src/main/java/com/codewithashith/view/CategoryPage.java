@@ -13,5 +13,6 @@ public class CategoryPage {
         for (Category category : categories) {
             println(category.getId() + ". " + category.getCategoryName());
         }
+        println(StringUtils.BACK_OPTION);
     }
 }

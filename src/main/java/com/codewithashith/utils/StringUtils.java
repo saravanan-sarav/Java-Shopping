@@ -14,4 +14,11 @@ public class StringUtils {
     public static final String INVALID_CREDENTIALS = "Invalid Credentials!!!";
     public static final String HOME_MENU = "1. Categories\n2. Products\n3. Cart\n4. Order\n5. Logout";
     public static final String CATEGORY_MENU = "All Categories";
+    public static final String PRODUCT_MENU = "Products";
+    public static final String BACK_OPTION = "99. Back";
+    public static final String CART_SUCCESS = "Product added to cart successfully!!!";
+    public static final String EMPTY_CART = "Cart is empty!!!";
+    public static final String CART = "Cart";
+    public static final String TOTAL_PRICE = "Total Price - Rs. ";
+    public static final String PRINT_CHECKOUT = "88. Checkout";
 }
