@@ -2,7 +2,7 @@ package com.codewithashith.utils;
 
 public class StringUtils {
     public static final String WELCOME_MESSAGE = "------Welcome to Java Shopping------";
-    public static final String AUTH_MENU = "1. Login\n2. Register";
+    public static final String AUTH_MENU = "1. Login\n2. Register\n99.Exit";
     public static final String ENTER_CHOICE = "Please enter your choice: ";
     public static final String INVALID_CHOICE = "Invalid choice!!! Please enter a valid choice";
     public static final String ENTER_EMAIL = "Please enter your email: ";
@@ -21,4 +21,7 @@ public class StringUtils {
     public static final String CART = "Cart";
     public static final String TOTAL_PRICE = "Total Price - Rs. ";
     public static final String PRINT_CHECKOUT = "88. Checkout";
+    public static final String PLACE_ORDER = "Your order has been placed!!!";
+    public static final String ORDERS = "Orders";
+    public static final String THANK_YOU = "Thank you!!!";
 }

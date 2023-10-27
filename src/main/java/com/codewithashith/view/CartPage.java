@@ -23,6 +23,7 @@ public class CartPage {
     }
 
     public void printCheckout() {
+        println("#---------------------#");
         println(StringUtils.PRINT_CHECKOUT);
     }
 

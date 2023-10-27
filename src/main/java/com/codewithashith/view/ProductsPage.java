@@ -10,7 +10,14 @@ import static com.codewithashith.utils.Utils.println;
 
 public class ProductsPage {
     public void printProducts(ArrayList<Product> products) {
-        println(StringUtils.PRODUCT_MENU);
+        try {
+            println("#---------------------#");
+            println(StringUtils.PRODUCT_MENU);
+            println("#---------------------#");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         for (Product product : products) {
             println(product.getId() + ". " + product.getTitle() + " - Rs." + product.getPrice());
         }
@@ -18,6 +25,13 @@ public class ProductsPage {
     }
 
     public void printSuccess() {
-        println(StringUtils.CART_SUCCESS);
+        try {
+            println("#---------------------#");
+            println(StringUtils.CART_SUCCESS);
+            println("#---------------------#");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

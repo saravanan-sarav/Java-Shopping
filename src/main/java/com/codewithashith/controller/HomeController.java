@@ -17,6 +17,7 @@ public class HomeController implements IHomeController {
     private final CategoryController categoryController;
     private final ProductController productController;
     private final CartController cartController;
+    private final OrderController orderController;
 
     public HomeController(AuthController authController) {
         homePage = new HomePage();
@@ -24,6 +25,7 @@ public class HomeController implements IHomeController {
         productController = new ProductController(this);
         categoryController = new CategoryController(this);
         cartController = new CartController(this);
+        orderController = new OrderController(this);
     }
 
     @Override
@@ -38,7 +40,8 @@ public class HomeController implements IHomeController {
             } else if (choice == 3) {
                 cartController.printCart();
             } else if (choice == 4) {
-
+                orderController.printOrders();
+                printMenu();
             } else if (choice == 5) {
                 setLoggedInUser(null);
                 authController.authMenu();

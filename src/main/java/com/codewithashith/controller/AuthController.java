@@ -41,12 +41,17 @@ public class AuthController implements IAuthController {
         int choice;
         try {
             choice = enterInt(StringUtils.ENTER_CHOICE);
-            if (choice == 1) {
-                login();
-            } else if (choice == 2) {
-                register();
+            if (choice == 99) {
+                authPage.printThankYou();
+                System.exit(0);
             } else {
-                invalidChoice(new AppException(StringUtils.INVALID_CHOICE));
+                if (choice == 1) {
+                    login();
+                } else if (choice == 2) {
+                    register();
+                } else {
+                    invalidChoice(new AppException(StringUtils.INVALID_CHOICE));
+                }
             }
         } catch (AppException appException) {
             invalidChoice(appException);
