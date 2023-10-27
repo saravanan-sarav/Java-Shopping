@@ -63,36 +63,42 @@ public class OrderController implements IOrderController {
     @Override
     public void printOrders() {
         Map<String, String> files = listFilesForFolder(new File(getFilePath()));
-        ordersPage.printOrder(files);
-        try {
-            int orderId = enterInt(StringUtils.ENTER_CHOICE);
-            if (orderId == 99) {
-                homeController.printMenu();
-            } else {
-                if (orderId > files.size()) {
-                    println(StringUtils.INVALID_CHOICE);
-                    printOrders();
+        if (files.isEmpty()) {
+            ordersPage.printNoOrders();
+            homeController.printMenu();
+        } else {
+            ordersPage.printOrder(files);
+            try {
+                int orderId = enterInt(StringUtils.ENTER_CHOICE);
+                if (orderId == 99) {
+                    homeController.printMenu();
                 } else {
-                    int id = 1;
-                    String path = "";
-                    for (final String key : files.keySet()) {
-                        if (id == orderId) {
-                            path = files.get(key);
+                    if (orderId > files.size()) {
+                        println(StringUtils.INVALID_CHOICE);
+                        printOrders();
+                    } else {
+                        int id = 1;
+                        String path = "";
+                        for (final String key : files.keySet()) {
+                            if (id == orderId) {
+                                path = files.get(key);
+                            }
                         }
+                        BufferedReader r = new BufferedReader(new FileReader(getFilePath() + path));
+                        String line;
+                        ordersPage.printDesign();
+                        while ((line = r.readLine()) != null) {
+                            println(line);
+                        }
+                        printOrders();
                     }
-                    BufferedReader r = new BufferedReader(new FileReader(getFilePath() + path));
-                    String line;
-                    ordersPage.printDesign();
-                    while ((line = r.readLine()) != null) {
-                        println(line);
-                    }
-                    printOrders();
                 }
-            }
 
-        } catch (AppException | IOException e) {
-            throw new RuntimeException(e);
+            } catch (AppException | IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
     }
 
     private Map<String, String> listFilesForFolder(final File folder) throws RuntimeException {
